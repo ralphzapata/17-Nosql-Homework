@@ -3,25 +3,25 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 
-// Setting up Express App using port 8000
+// Express App using port 8000
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(morgan("dev"));
 
-// Sets up the Express 
+//  Express 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// db mongo
+// mongo
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/workout";
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useFindAndModify: false
 })
 
-// Creating Routes
+// Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
